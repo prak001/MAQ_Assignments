@@ -1,0 +1,1 @@
+SELECT empName, department,phone,email FROM Employee WHERE phone LIKE '3-%';

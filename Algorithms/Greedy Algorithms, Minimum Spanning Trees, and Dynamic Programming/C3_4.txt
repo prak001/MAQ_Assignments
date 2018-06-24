@@ -1,0 +1,35 @@
+import java.io.*;
+import java.util.*;
+public class KS {  
+  
+        public static void main(String[] args) {  
+            // TODO Auto-generated method stub  
+            int A[][];  
+      
+            Path p = Paths.get("knap.txt");  
+            ArrayList<Item> Nodes = new ArrayList<Item>();   
+                BufferedReader b = Files.newBufferedReader(p);  
+                String line = b.readLine();  
+                int  n = Integer.parseInt(line.split(" ")[1]);  
+                int wt = Integer.parseInt(line.split(" ")[0]);  
+                while ((line = br.readLine())!=null){   
+                    Nodes.add(new Node(Integer.parseInt(line.split(" ")[0]),Integer.parseInt(line.split(" ")[1])));  
+                }  
+                Integer dp= new int[n][W+1];  
+                for(int x =0;x<W+1;x++){  
+                    dp[0][x] = 0;                  
+                }  
+                for (int i =0;i<n;i++){  
+                    for(int p=0;p<W+1;p++){  
+                        int j = (i==0)?(0):(i-1);  
+                        if (x<Nodes.get(i).w){                         
+                            dp[i][x] = dp[j][x];    
+                        }else{  
+                            dp[i][x] = Math.max(dp[j][x], dp[j][x-Nodes.get(i).w]+Nodes.get(i).v);  
+                        }  
+                    }  
+                }  
+                System.out.println(dp[n-1][W]);  
+        }  
+      
+    }  

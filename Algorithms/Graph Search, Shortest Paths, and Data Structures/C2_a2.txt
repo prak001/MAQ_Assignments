@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+vector < pair < int , int > > adj[];   
+int dist [123456];
+bool vis [123456];
+static int c=0;
+int dijkstra(){
+    dist[1] = 0;
+    set < pair < int , int > > s;         \
+
+    s.insert({0 , 1});
+
+    while(!s.empty()){
+
+        pair <int , int> p = *s.begin();  
+        s.erase(s.begin());
+
+        int x = p.s; 
+		int wt = p.f;
+        if( vis[x] ) continue;              
+         vis[x] = true;
+
+        for(int i = 0; i < adj[x].size(); i++){
+            int e = adj[x][i].f; int w = adj[x][i].s;
+            if(dist[x] + w < dist[e]  ){          
+                dist[e] = dist[x] + w;
+				c++;
+                s.insert({dist[e],  e} );          
+            }
+        }
+    }
+	
+	return c;
+}
+int main()
+{
+	cin>>n>>e;
+	for(i=0;i<e;i++)
+	{
+	cin>>x>>y;
+	adj[i].push_back(make_pair(x,y));
+	}
+	int ans=dijkstra();
+	cout<<ans;
+}

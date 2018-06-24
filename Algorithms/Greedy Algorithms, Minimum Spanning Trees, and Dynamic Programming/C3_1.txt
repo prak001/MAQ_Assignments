@@ -1,0 +1,55 @@
+import java.io.*;
+import java.util.*;
+public class CheckScheduler {
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		try {
+
+			ArrayList<Scheduler> sch = new ArrayList<Scheduler>();
+			FileInputStream fstream = new FileInputStream("Schedulers1.txt");
+			
+			DataInputStream dis = new DataInputStream(fstream);
+			Scanner sc=new Scanner();
+			String str=Integer.parseInt(sc.readLine());
+
+			while ((str=br.readLine())!= null){
+				String str[] = str.split(" ");
+				sch.add(new PS1Q1.Scheduler(Integer.parseInt(str[0]),Integer.parseInt(str[1])));		  
+			}
+			Collections.sort(sch);
+			Collections.reverse(sch);
+			int t = 0;
+			double wt = 0;
+			for(int i=0;i<sch.size();i++)
+			{
+				Scheduler j=sch.get(i);
+				wt += j.wt*(t+j.length);
+				t += j.length;				
+			}
+			System.out.println(wt);
+
+		} catch ( IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	static class Scheduler implements Comparable<Scheduler>{
+		int wt;
+		int length;
+		public int val(){
+			return wt-length;
+		}
+		public Scheduler(int w, int l){
+			wt = w; length = l;
+		}
+		@Override
+		public int compareTo(Scheduler arg0) {
+			if (this.val()==arg0.val()){
+				return(this.wt>arg0.wt?(1):(-1));
+			}
+			return(this.val()>arg0.val()?(1):(-1));			
+		}
+	}
+
+}

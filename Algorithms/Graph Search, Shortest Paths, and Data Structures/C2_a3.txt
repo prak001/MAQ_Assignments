@@ -1,0 +1,48 @@
+import java.io.*;
+import java.util.*;
+
+public class MFind{
+	private PriorityQueue<Integer> prev=new PriorityQueue<Integer>;
+	private PriorityQueue<Integer> after=new PriorityQueue<Integer>;
+	private int totalFound=0;
+	
+	public MFind(){
+	}
+	public void put(int n){
+		if (totalFound == 0){
+			after.put(n);
+		} 
+		else if(totalFound % 2 == 0){
+			if (n > prev.peek()){
+				after.put(prev.poll());
+				prev.put(n);	
+			} else {
+				after.put(n);
+			}
+			
+		}
+		else {
+			if (n < after.peek()){
+				prev.put(after.poll());
+				after.put(n);
+			} else {
+				prev.put(n);
+			}
+		}
+		totalFound++;
+	}
+	public int median(){
+		return after.peek();
+	}
+	
+	public static void main(String [] args) {
+		int sum = 0;
+		MFind m = new MFind();
+		Scanner input = new Scanner(new File("M.txt"));
+		while (input.hasNextInt()){
+			m.put(input.nextInt());
+			sum = sum + m.median();
+		}
+		System.out.println(sum % 10000);
+	}
+}

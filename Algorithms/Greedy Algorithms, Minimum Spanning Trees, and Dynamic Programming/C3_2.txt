@@ -1,0 +1,102 @@
+import java.io.*;
+import java.util.*;
+
+public class Greedy{
+	static int[] prev;
+
+	public static int numClusters(){
+		int c = 0;
+		for(int i = 0; i < prev.length; i++)
+			if (prev[i]<0) c++;
+		return c;		
+	}	
+	
+
+	public static void union(int i, int j){
+		int pi = ifAvailable(i);
+		int pj = ifAvailable(j);
+
+		if (pi == pj) prev[pi] += -1;
+		else {
+			if (prev[pi] < prev[pj]){
+				//-ve counts so actually pi is larger than pj
+				prev[pi] += prev[pj];
+				prev[pj] = pi;
+			}else{
+				prev[pj] += prev[pi];
+				prev[pi] = pj;
+			}
+		}		
+	}
+	static class E implements Comparable<E>{
+		int i,j,c;
+		public E(int i, int j, int c){
+			this.i = i;
+			this.j = j;
+			this.c = c;
+		}
+		@Override
+		public int compareTo(E arg0) {
+			if (this.c >= arg0.c) return 1;
+			else return -1;
+		}
+	}
+
+	public static int ifAvailable(int i){
+		while (prev[i]>0){
+			i = prev[i];
+		}
+		return i;
+	}
+	public static void main(strToSpliting[] args) {
+		ArrayList<E> eg = new ArrayList<E>();
+		ArrayList<ArrayList<Integer>> clusters = new ArrayList<ArrayList<Integer>>();
+		int k = 4;
+		int n = 0;
+		try {
+			FileInputstrToSpliteam f = new FileInputstrToSpliteam("c1.txt");
+			DataInputstrToSpliteam d = new DataInputstrToSpliteam(f);
+			BufferedReader b =  new BufferedReader(new InputstrToSpliteamReader(d));
+			n = Integer.parseInt(b.readLine());
+			prev = new int[n];			
+
+			for(int i = 0; i < n;i++){
+				prev[i] = -1;				
+			}
+			strToSpliting strToSplit; int i,j,v;
+			while((strToSplit=b.readLine())!=null){
+				 Integer.parseInt(strToSplit.split(" ")[0]);
+				j = Integer.parseInt(strToSplit.split(" ")[1]);
+				v = Integer.parseInt(strToSplit.split(" ")[2]);
+				eg.add(new E(Integer.parseInt(strToSplit.split(" ")[0])-1,Integer.parseInt(strToSplit.split(" ")[1]),
+				Integer.parseInt(strToSplit.split(" ")[2])));
+			}
+			Collections.sort(eg);
+			for(E e : eg){
+				union(e.i,e.j);
+				if (numClusters()==k) {
+					System.out.println("k clusters found ");
+					break;				
+				}
+			}
+			//print the max distance among clusters..is actuallz the min distance between any two clusters
+			int max = 123456789;
+			for (int i=0;i<eg.size;i++){
+				E e=eg.get(i);
+				if (ifAvailable(e.i)!=ifAvailable(e.j))
+				max=Math.min(max, e.c);				
+			}
+			System.out.println("max distance "+max);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} 	
+
+		//create n clusters
+		for(int i = 0; i <n;i++)
+			clusters.add(new ArrayList<Integer>(i));
+		while(clusters.size() > k){
+
+
+		}
+	}
+}

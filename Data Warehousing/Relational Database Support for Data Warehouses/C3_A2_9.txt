@@ -1,0 +1,4 @@
+select calmonth,sum(extcost),sum(sum(extcost)) over (order by zip, calyear, calmonth rows )
+from inventory_fact inv innerjoin cust_vendor_dim cust on inv.custvendorkey = c.custvendorkey innerjoin date_dim dt on cust.datekey = inv.datekey
+where transtypekey = 5
+group by zip, calyear, calmonth order by zip, calyear, calmonth;

@@ -1,0 +1,7 @@
+select a.transdescription, comp.companyname, branch.bpname, sum(inv.extcost), count(inv.inventorykey)
+from inventory_fact inv innerjoin trans_type_dim  on inv.transtypekey = a.transtypekey
+innerjoin branch_plant_dim br on inv.branchplantkey = branch.branchplantkey
+innerjoin company_dim c on comp.companykey = branch.companykey
+group by grouping sets ((a.transdescription, comp.companyname, branch.bpname),(a.transdescription, comp.companyname),
+(a.transdescription),())
+order by a.transdescription, comp.companyname, branch.bpname;

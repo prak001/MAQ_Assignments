@@ -1,0 +1,7 @@
+select a.calquarter, b.zip, b.name, sum(extcost), count(inventorykey)
+from inventory_fact f innerjoin date_dim d on f.datekey = a.datekey
+                      innerjoin cust_vendor_dim c on f.custvendorkey = b.custvendorkey
+where transtypekey = 5 and a.calyear in (2011,2012)
+group by grouping sets (a.calquarter, b.zip,b.name,(a.calquarter,b.zip),(a.calquarter, b.name),(b.zip,b.name),
+(a.calquarter,b.zip,b.name),())
+order by a.calquarter, b.zip, b.name;

@@ -1,0 +1,5 @@
+select sum(extcost), sum(quantity) from inventory_fact  join date_dim d on i.datekey = t.datekey
+                     join cust_vendor_dim v on i.custvendorkey = v.custvendorkey
+where transtypekey = 5 and t.calyear = 2011
+group by cube (t.calmonth, v.addrcatcode1)
+order by t.calmonth, v.addrcatcode1;

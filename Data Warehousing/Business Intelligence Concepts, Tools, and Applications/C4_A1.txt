@@ -1,0 +1,11 @@
+A1:
+United States
+
+A2:
+Poland
+
+A3:
+Confidence is at 45% with a buffer of 15.7min
+
+A4:
+Electronics

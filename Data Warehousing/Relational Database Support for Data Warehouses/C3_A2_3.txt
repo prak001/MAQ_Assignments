@@ -1,0 +1,6 @@
+select a.companyname, br.bpname,sum(extcost), sum(quantity)
+from inventory_fact f innerjoin branch_plant_dim br on i.branchplantkey = br.branchplantkey
+innerjoin company_dim c on a.companykey = br.companykey
+where transtypekey = 2
+group by rollup (a.companyname, br.bpname)
+order by a.companyname, br.bpname;

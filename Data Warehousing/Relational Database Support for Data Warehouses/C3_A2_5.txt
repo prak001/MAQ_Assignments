@@ -1,0 +1,5 @@
+	select sum(inv.extcost) , count(inv.inventorykey) 
+innerjoin cust_vendor_dim cust on inv.custvendorkey = cust.custvendorkey
+where transtypekey = 5 and dt.calyear in (2011,2012)
+group by rollup(dt.calyear, dt.calquarter), cust.name
+order by dt.calyear, dt.calquarter, cust.name;

@@ -1,0 +1,21 @@
+Q1.
+
+Part1
+Customer 
+ a. CustId: MmbrId  and Corporate Customer Id 
+ b. CustName: MmbrName  and Corporate Customer Name Location 
+ c. CustZip: MmbrZip  and Corporate Customer Name And Location  
+Part2
+2. Product 
+ a. ProdId: MemTypeId, ServCatId, MerchId (ERD) and Event Type Code 
+ b. ProdType: MemTypeName, ServCatName, MerchType (ERD) and Event Name 
+ c. ProdPrice: MemTypePrice, ServCatPrice, MerchPrice (ERD) and Amount   
+ d. ProdName: MerchName 
+ e. ProdQty: Qty 
+ 
+ 
+Q2
+
+1. nitPrice: MemTypePrice, ServCatPrice, MerchPrice  
+2. Quantity: Additive Measure 
+3. Price: nitPrice  Quantity; Derived Additive Measure 

@@ -1,0 +1,4 @@
+Hierarchy of ProdType &ProdName is only valid or merchandise products. 
+ProdName is missing or other  products.
+This can be solved by assigning them a default value of nnamed.  
+2.Relationships involving membership  have cardinality at the  dimensions due to the act that membership is optional. 
